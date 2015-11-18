@@ -1,0 +1,29 @@
+<?php
+
+	require('connetion.php');
+
+	if(isset($_POST['username']) && isset($_POST['userpwd'])){
+
+		$username = htmlspecialchars($_POST['username']);
+		$userpwd = htmlspecialchars($_POST['userpwd']);
+
+
+		$sql = "insert into user_list(name, pwd) values('".$username."','".$userpwd."')"
+
+		$result = $mysqli->query($sql);
+
+		if ($result) {
+			# code...
+			$jsonArray = array('cid' => '1001','ret' => '1');
+			echo json_encode($jsonArray);
+		} else {
+			$jsonArray = array('cid' => '1001','ret' => '0');
+			echo json_encode($jsonArray);
+		}
+
+		$musqli->close();
+	}else {
+		$jsonArray = array('cid' => '1001','ret' => '0');
+		echo json_encode($jsonArray);
+	}
+?>
